@@ -11,7 +11,7 @@ function ensureAdminOrServiceProvider(req, res, next) {
     return res.status(403).json({ message: 'Access denied' });
 }
 
-router.post('registerSP', ensureAdminOrServiceProvider, async (req, res) => {
+router.post('/registerSP', ensureAdminOrServiceProvider, async (req, res) => {
     try {
         // Check if email already exists
         const existingProvider = await db.ServiceProvider.findOne({ where: { email: req.body.email } });
@@ -39,7 +39,7 @@ router.post('registerSP', ensureAdminOrServiceProvider, async (req, res) => {
     }
 });
 
-router.put('update:id', async (req, res) => {
+router.put('/update:id', async (req, res) => {
     try {
         const serviceProvider = await db.ServiceProvider.findByPk(req.params.id);
         if (!serviceProvider || serviceProvider.role !== 'serviceProvider') {
@@ -82,7 +82,7 @@ router.delete('/delete/:id', async (req, res) => {
     }
 });
 
-router.get('companies', async (req, res) => {
+router.get('/companies', async (req, res) => {
     try {
         const serviceProviders = await db.ServiceProvider.findAll({
             attributes: ['id', 'company_name'], // Only fetch id and company_name
@@ -99,7 +99,7 @@ router.get('companies', async (req, res) => {
     }
 });
 
-router.get('companies/:id', async (req, res) => {
+router.get('/companies/:id', async (req, res) => {
     try {
         const serviceProvider = await db.ServiceProvider.findByPk(req.params.id, {
             attributes: ['id', 'company_name'], // Only fetch id and company_name
