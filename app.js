@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/users');
 const serviceProviderRoutes = require('./routes/serviceProviders');
+const reviews = require('./routes/reviews')
 const passport = require('passport');
 require('dotenv').config();
 require('./middlewares/googleAuth')
@@ -17,6 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Use routes
 app.use('/users', userRoutes);
 app.use('/serviceProviders', serviceProviderRoutes);
+app.use('/reviews', reviews)
+// For authentication we use passport.js
 app.use(passport.initialize())
 // ... other routes ...
 require('./config/passport')(passport)

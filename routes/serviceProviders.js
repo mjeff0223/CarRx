@@ -39,7 +39,7 @@ router.post('/registerSP', ensureAdminOrServiceProvider, async (req, res) => {
     }
 });
 
-router.put('/update:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
     try {
         const serviceProvider = await db.ServiceProvider.findByPk(req.params.id);
         if (!serviceProvider || serviceProvider.role !== 'serviceProvider') {
